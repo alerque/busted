@@ -5,9 +5,9 @@ end
 local getfenv = require 'busted.compatibility'.getfenv
 local setfenv = require 'busted.compatibility'.setfenv
 local unpack = require 'busted.compatibility'.unpack
-local path = require 'pl.path'
-local pretty = require 'pl.pretty'
-local system = require 'system'
+local path = busted_require 'pl.path'
+local pretty = busted_require 'pl.pretty'
+local system = busted_require 'system'
 local throw = error
 
 local failureMt = {
@@ -46,12 +46,12 @@ local function isCallable(obj)
 end
 
 return function()
-  local mediator = require 'mediator'()
-
   local busted = {}
   busted.version = '2.0.0-0'
 
   busted.require = busted_require
+
+  local mediator = busted.require 'mediator'()
 
   local root = require 'busted.context'()
   busted.context = root.ref()
