@@ -1,3 +1,7 @@
+local busted_require = function (path)
+  return require(path)
+end
+
 local getfenv = require 'busted.compatibility'.getfenv
 local setfenv = require 'busted.compatibility'.setfenv
 local unpack = require 'busted.compatibility'.unpack
@@ -46,6 +50,8 @@ return function()
 
   local busted = {}
   busted.version = '2.0.0-0'
+
+  busted.require = busted_require
 
   local root = require 'busted.context'()
   busted.context = root.ref()
