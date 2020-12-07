@@ -1,5 +1,11 @@
+local busted_internal_loaded = {}
+
 local busted_require = function (path)
-  return require(path)
+  local default_loaded = package.loaded
+  package.loaded = busted_internal_loaded
+  local pack = require(path)
+  package.loaded = default_loaded
+  return pack
 end
 
 local getfenv = require 'busted.compatibility'.getfenv
